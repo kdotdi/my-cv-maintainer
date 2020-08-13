@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollCvView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/global_white">
+
+        <ImageView
+            android:id="@+id/imageCvPicture"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_32dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/labelCvPersonName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_32dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:fontFamily="@font/baloo_tamma_medium"
+            android:text="@string/cv_name"
+            android:textColor="@color/global_black"
+            android:textSize="@dimen/textsize_24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageCvPicture"
+            tools:text="Name" />
+
+        <TextView
+            android:id="@+id/labelCvSummary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="@string/cv_summary"
+            android:textColor="@color/global_black"
+            android:textSize="@dimen/textsize_14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelCvPersonName"
+            tools:text="Summary" />
+
+        <TextView
+            android:id="@+id/labelCvPositions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_24dp"
+            android:fontFamily="@font/baloo_tamma_medium"
+            android:text="@string/cv_positions_header"
+            android:textColor="@color/global_black"
+            android:textSize="@dimen/textsize_14sp"
+            app:layout_constraintEnd_toEndOf="@id/labelCvSummary"
+            app:layout_constraintStart_toStartOf="@id/labelCvSummary"
+            app:layout_constraintTop_toBottomOf="@id/labelCvSummary"
+            tools:text="POSITIONS" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCvPositionsFront"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:layout_marginBottom="@dimen/margin_32dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@id/labelCvNext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelCvAddPosition"
+            app:layout_constraintVertical_bias="0" />
+
+        <View
+            android:id="@+id/groupClickableAddPosition"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/labelCvNext"
+            app:layout_constraintEnd_toEndOf="@id/imageCvPicklistArrowRight"
+            app:layout_constraintStart_toStartOf="@id/labelCvAddPosition"
+            app:layout_constraintTop_toBottomOf="@id/labelCvPositions" />
+
+        <TextView
+            android:id="@+id/labelCvAddPosition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:fontFamily="@font/baloo_tamma_regular"
+            android:text="@string/cv_add_position"
+            android:textColor="@color/global_black"
+            android:textSize="@dimen/textsize_14sp"
+            app:layout_constraintBottom_toTopOf="@id/labelCvNext"
+            app:layout_constraintEnd_toStartOf="@id/imageCvPicklistArrowRight"
+            app:layout_constraintStart_toStartOf="@id/labelCvSummary"
+            app:layout_constraintTop_toBottomOf="@id/labelCvPositions"
+            app:layout_constraintVertical_bias="0" />
+
+        <ImageView
+            android:id="@+id/imageCvPicklistArrowRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="@id/labelCvAddPosition"
+            app:layout_constraintEnd_toEndOf="@id/labelCvSummary"
+            app:layout_constraintStart_toEndOf="@id/labelCvAddPosition"
+            app:layout_constraintTop_toTopOf="@id/labelCvAddPosition" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupAddPosition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="labelCvAddPosition,imageCvPicklistArrowRight,groupClickableAddPosition" />
+
+        <TextView
+            android:id="@+id/labelCvNext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:layout_marginBottom="@dimen/margin_16dp"
+            android:background="@drawable/selector_rounded_button"
+            android:fontFamily="@font/baloo_tamma_medium"
+            android:gravity="center"
+            android:padding="@dimen/margin_12dp"
+            android:text="@string/cv_next_empty"
+            android:textColor="@color/global_white"
+            android:textSize="@dimen/textsize_18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="1" />
+
+        <include layout="@layout/bottom_sheet_add_positions" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

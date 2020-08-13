@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.hiya.jacoco-android'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.example.kdotdi.myCvMaintainer"
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionName androidGitVersion.name()
+        versionCode androidGitVersion.code()
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    signingConfigs {
+        release {
+            releaseSigningConfig
+        }
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig releaseSigningConfig
+        }
+        debug {
+            testCoverageEnabled BuildTestCoverageEnabled.toBoolean()
+            debuggable true
+            minifyEnabled false
+        }
+    }
+
+    flavorDimensions 'environment'
+    productFlavors {
+        ['dev', 'prod'].each {
+            "$it" {
+                dimension 'environment'
+                matchingFallbacks = it.name
+                versionNameSuffix "-$it.name"
+                applicationIdSuffix ".$it.name"
+                manifestPlaceholders = [
+                        flavor         : "$it.name"
+                ]
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = 1.8
+    }
+}
+
+jacocoAndroidUnitTestReport {
+    xml.enabled true
+}
+
+check {
+    finalizedBy jacocoTestReport
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+dependencies {
+    testImplementation appDependencies.testImplementation
+    androidTestImplementation appDependencies.androidTestImplementation
+    implementation appDependencies.implementation
+    kapt appDependencies.kapt
+    compileOnly appDependencies.compileOnly
+    api appDependencies.api
+}

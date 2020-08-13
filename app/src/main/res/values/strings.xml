@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">My CV Maintainer</string>
+
+    <string name="cv_name">Name</string>
+    <string name="cv_summary">Summary</string>
+    <string name="cv_positions_title">Add position</string>
+    <string name="cv_positions_title_hint">Title of position</string>
+    <string name="cv_positions_summary_hint">Type of tasks, tools used</string>
+    <string name="cv_positions_add">ADD</string>
+    <string name="cv_positions_save">SAVE</string>
+    <string name="cv_positions_clear">CLEAR</string>
+
+    <string name="cv_positions_header">POSITIONS</string>
+    <string name="cv_add_position">Add positions</string>
+    <string name="cv_next_empty">NO POSITIONS</string>
+
+    <string name="general_nointernet_error_label">You seem to be offline.</string>
+    <string name="general_error_label">Something went wrong. Please try again later.</string>
+</resources>

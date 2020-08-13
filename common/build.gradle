@@ -1,0 +1,82 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.hiya.jacoco-android'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    androidExtensions {
+        experimental = true
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode androidGitVersion.code()
+        versionName androidGitVersion.name()
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            releaseSigningConfig
+        }
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            testCoverageEnabled BuildTestCoverageEnabled.toBoolean()
+            minifyEnabled false
+        }
+    }
+
+    flavorDimensions 'environment'
+    productFlavors {
+        ['dev', 'prod'].each {
+            "$it" {
+                dimension 'environment'
+                matchingFallbacks = it.name
+                versionNameSuffix "-$it.name"
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = 1.8
+    }
+}
+
+jacocoAndroidUnitTestReport {
+    xml.enabled true
+}
+
+check {
+    finalizedBy jacocoTestReport
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation commonDependencies.testImplementation
+    androidTestImplementation commonDependencies.androidTestImplementation
+    implementation commonDependencies.implementation
+    kapt commonDependencies.kapt
+    compileOnly commonDependencies.compileOnly
+}

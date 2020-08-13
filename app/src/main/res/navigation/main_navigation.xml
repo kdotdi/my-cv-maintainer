@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation.xml"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.kdotdi.app.view.splash.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/action_splashFragment_to_cvFragment"
+            app:destination="@id/cvFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cvFragment"
+        android:name="com.example.kdotdi.app.view.cv.CvFragment"
+        android:label="CvFragment"
+        tools:layout="@layout/fragment_cv">
+    </fragment>
+
+</navigation>

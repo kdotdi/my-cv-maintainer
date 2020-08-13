@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_16dp">
+
+    <EditText
+        android:id="@+id/textCvPositionActivePositionTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_100dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginBottom="@dimen/margin_8dp"
+        android:hint="@string/cv_positions_title_hint"
+        android:inputType="text"
+        android:maxLength="@integer/position_title_max_field_length"
+        android:paddingEnd="@dimen/margin_28dp"
+        android:textColor="@color/global_black"
+        android:textSize="@dimen/textsize_16sp"
+        android:theme="@style/EditTextDark"
+        app:backgroundTint="@color/global_black"
+        app:layout_constraintBottom_toTopOf="@id/textCvPositionActivePositionDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageCvPositionActivePositionTitleClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:paddingTop="@dimen/margin_8dp"
+        android:paddingEnd="@dimen/margin_4dp"
+        android:paddingBottom="@dimen/margin_8dp"
+        app:layout_constraintVertical_bias="0"
+        android:src="@drawable/ic_delete"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/textCvPositionActivePositionTitle"
+        app:layout_constraintEnd_toEndOf="@id/textCvPositionActivePositionTitle"
+        app:layout_constraintTop_toTopOf="@id/textCvPositionActivePositionTitle"
+        tools:visibility="visible" />
+
+    <EditText
+        android:id="@+id/textCvPositionActivePositionDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_8dp"
+        android:hint="@string/cv_positions_summary_hint"
+        android:inputType="textMultiLine"
+        android:maxLength="@integer/position_description_max_field_length"
+        android:paddingEnd="@dimen/margin_28dp"
+        android:textColor="@color/global_black"
+        android:textSize="@dimen/textsize_16sp"
+        android:theme="@style/EditTextDark"
+        app:backgroundTint="@color/global_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/textCvPositionActivePositionTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCvPositionActivePositionTitle" />
+
+    <ImageView
+        android:id="@+id/imageCvPositionActivePositionDescriptionClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:paddingTop="@dimen/margin_8dp"
+        android:paddingEnd="@dimen/margin_4dp"
+        android:paddingBottom="@dimen/margin_8dp"
+        app:layout_constraintVertical_bias="0"
+        android:src="@drawable/ic_delete"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/textCvPositionActivePositionDescription"
+        app:layout_constraintEnd_toEndOf="@id/textCvPositionActivePositionDescription"
+        app:layout_constraintTop_toTopOf="@id/textCvPositionActivePositionDescription"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

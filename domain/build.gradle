@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.hiya.jacoco-android'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode androidGitVersion.code()
+        versionName androidGitVersion.name()
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+        }
+        debug {
+            debuggable true
+            testCoverageEnabled BuildTestCoverageEnabled.toBoolean()
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    flavorDimensions 'environment'
+    productFlavors {
+        ['dev', 'prod'].each {
+            "$it" {
+                matchingFallbacks = it.name
+                versionNameSuffix "-$it.name"
+            }
+        }
+    }
+}
+
+jacocoAndroidUnitTestReport {
+    xml.enabled true
+}
+
+check {
+    finalizedBy jacocoTestReport
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+dependencies {
+    testImplementation domainDependencies.testImplementation
+    androidTestImplementation domainDependencies.androidTestImplementation
+    implementation domainDependencies.implementation
+    kapt domainDependencies.kapt
+    compileOnly domainDependencies.compileOnly
+    api domainDependencies.api
+}

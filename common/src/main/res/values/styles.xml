@@ -1,0 +1,39 @@
+<resources>
+    <style name="BalooTamma" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/baloo_tamma_regular</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="EditTextDark">
+        <item name="android:colorControlActivated">@color/global_black</item>
+        <item name="android:colorControlNormal">@color/global_black</item>
+        <item name="fontFamily">@font/baloo_tamma_regular</item>
+        <item name="android:textColorHint">@color/global_black_20percent</item>
+        <item name="android:textColorHighlight">@color/global_black_20percent</item>
+    </style>
+
+    <style name="MaterialButton">
+        <item name="android:fontFamily">@font/baloo_tamma_medium</item>
+        <item name="android:textColor">@color/global_white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/textsize_14sp</item>
+        <item name="cornerRadius">@dimen/margin_4dp</item>
+        <item name="android:backgroundTint">@color/button_rounded_color</item>
+    </style>
+
+    <style name="LightMaterialButton" parent="MaterialButton">
+        <item name="android:textColor">@color/button_rounded_color_light</item>
+    </style>
+
+    <style name="BottomSheetDrawer">
+        <item name="android:paddingLeft">@dimen/drawer_left_right_padding</item>
+        <item name="android:paddingRight">@dimen/drawer_left_right_padding</item>
+        <item name="android:paddingTop">@dimen/drawer_top_padding</item>
+        <item name="android:background">@drawable/drawable_rounded_bottom_sheet</item>
+    </style>
+
+    <style name="PositionBottomSheetDrawer">
+        <item name="android:background">@drawable/drawable_rounded_background</item>
+    </style>
+
+</resources>

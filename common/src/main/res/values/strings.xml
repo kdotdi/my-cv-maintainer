@@ -1,0 +1,6 @@
+<resources>
+    <string name="general_ok">OK</string>
+    <string name="general_nointernet_error_label">You seem to be offline.</string>
+    <string name="general_error_label">Something went wrong. Please try again later.</string>
+    <string name="general_next_button">NEXT</string>
+</resources>

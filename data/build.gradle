@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.hiya.jacoco-android'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode androidGitVersion.code()
+        versionName androidGitVersion.name()
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true 
+        }
+        debug {
+            debuggable true
+            testCoverageEnabled BuildTestCoverageEnabled.toBoolean()
+        }
+    }
+
+    flavorDimensions 'environment'
+    productFlavors {
+        ['dev', 'prod'].each {
+            "$it" {
+                dimension "environment"
+                buildConfigField 'String', 'API_PATH', '"' + project.properties["KeyApiUrl_$it.name"] + '"'
+                versionNameSuffix "-$it.name"
+            }
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = 1.8
+    }
+}
+
+jacocoAndroidUnitTestReport {
+    xml.enabled true
+}
+
+check {
+    finalizedBy jacocoTestReport
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+dependencies {
+    testImplementation dataDependencies.testImplementation
+    androidTestImplementation dataDependencies.androidTestImplementation
+    implementation dataDependencies.implementation
+    kapt dataDependencies.kapt
+    compileOnly dataDependencies.compileOnly
+    api dataDependencies.api
+}

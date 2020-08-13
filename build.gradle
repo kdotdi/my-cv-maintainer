@@ -1,0 +1,65 @@
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
+    }
+
+    dependencies {
+        ext.kotlin = '1.3.72'
+
+        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + kotlin
+        classpath 'org.jetbrains.kotlin:kotlin-android-extensions:' + kotlin
+        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0'
+        classpath 'com.hiya:jacoco-android:0.2'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'com.gladed.androidgitversion' version '0.4.13'
+}
+
+apply from: 'dependencies.gradle'
+
+allprojects {
+
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
+    }
+
+    apply plugin: 'com.gladed.androidgitversion'
+    androidGitVersion {
+        hideBranches = ['develop', 'master', 'feature.*']
+        baseCode 1
+    }
+
+}
+
+Properties localProperties = new Properties()
+File localPropertiesFile = file('local.properties')
+localProperties.load(new FileInputStream(localPropertiesFile))
+
+localProperties.each {
+    getProject().ext.setProperty(it.key, it.value)
+}
+
+ext {
+    releaseSigningConfig = com.android.build.gradle.internal.dsl.SigningConfig.newInstance(
+            keyAlias: project['key.alias'],
+            keyPassword: project['key.password'],
+            storeFile: file(project['store.file']),
+            storePassword: project['store.password'],
+    )
+}
+
+wrapper {
+    gradleVersion = '6.4.1'
+    distributionType = Wrapper.DistributionType.ALL
+}
