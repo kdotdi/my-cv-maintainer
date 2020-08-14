@@ -8,7 +8,6 @@
 
     <TextView
         android:id="@+id/labelCvPositionPositionTitleInactive"
-        android:layout_marginStart="@dimen/margin_100dp"
         android:fontFamily="@font/baloo_tamma_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +16,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/labelCvPositionPositionDescriptionInactive"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Title" />
@@ -29,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_4dp"
         android:layout_marginEnd="@dimen/margin_16dp"
-        android:layout_marginBottom="@dimen/margin_16dp"
+        android:layout_marginBottom="@dimen/margin_8dp"
         android:textColor="@color/global_gray"
         android:textSize="@dimen/textsize_14sp"
         app:layout_constraintBottom_toBottomOf="parent"

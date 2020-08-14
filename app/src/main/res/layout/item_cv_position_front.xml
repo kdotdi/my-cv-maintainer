@@ -7,29 +7,29 @@
 
     <TextView
         android:id="@+id/labelCvPositionFrontPositionTitle"
-        android:fontFamily="@font/baloo_tamma_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
-        android:layout_marginStart="@dimen/margin_100dp"
+        android:fontFamily="@font/baloo_tamma_regular"
+        android:paddingEnd="@dimen/margin_16dp"
         android:textColor="@color/global_black_75percent"
         android:textSize="@dimen/textsize_14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/labelCvPositionFrontPositionDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Title" />
 
     <TextView
         android:id="@+id/labelCvPositionFrontPositionDescription"
-        android:fontFamily="@font/baloo_tamma_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_4dp"
         android:layout_marginEnd="@dimen/margin_16dp"
         android:layout_marginBottom="@dimen/margin_16dp"
+        android:fontFamily="@font/baloo_tamma_regular"
+        android:paddingEnd="@dimen/margin_16dp"
         android:textColor="@color/global_black_75percent"
         android:textSize="@dimen/textsize_14sp"
         app:layout_constraintBottom_toBottomOf="parent"

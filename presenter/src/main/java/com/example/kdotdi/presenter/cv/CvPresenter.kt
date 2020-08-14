@@ -5,6 +5,7 @@ import com.example.kdotdi.data.extensions.empty
 import com.example.kdotdi.domain.apiHandling.response.doOnError
 import com.example.kdotdi.domain.apiHandling.response.doOnSuccess
 import com.example.kdotdi.domain.entity.*
+import com.example.kdotdi.domain.usecase.cv.GetCvPositionsUseCase
 import com.example.kdotdi.domain.usecase.cv.GetCvSummaryUseCase
 import com.example.kdotdi.presenter.common.CommonUseCasePresenter
 import com.example.kdotdi.presenter.extensions.launchUseCase
@@ -12,7 +13,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class CvPresenter @Inject constructor(
-    private val getCvSummaryUseCase: GetCvSummaryUseCase
+    private val getCvSummaryUseCase: GetCvSummaryUseCase,
+    private val getCvPositionsUseCase: GetCvPositionsUseCase
 ) : CommonUseCasePresenter<CvView>(),
     AddPositionItemPresenter,
     DisplayPositionItemPresenter {
@@ -20,7 +22,7 @@ class CvPresenter @Inject constructor(
     val positionList = mutableListOf<CvPosition>()
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    var currentlyActivePositionIndex = 0
+    var currentlyActivePositionIndex = -1
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     var nextEnabled = false
@@ -160,8 +162,8 @@ class CvPresenter @Inject constructor(
         }
     }
 
-    fun onSavePositionClicked() {
-        Timber.i("Save position selected")
+    fun onSavePositions() {
+        Timber.i("Save positions selected")
         present {
             updateFrontPositionList()
             hideAddPosition()
@@ -269,6 +271,29 @@ class CvPresenter @Inject constructor(
                 present {
                     loadPersonImage(it.imageUri)
                     fillCvSummary(it)
+                    getCvPositions()
+                }
+            }
+            doOnError {
+                Timber.i("Failed to get cv summary")
+            }
+        }
+    //endregion
+
+    //region getCvPositionsUseCase
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun getCvPositions() =
+        launchUseCase(
+            getCvPositionsUseCase
+        ) {
+            Timber.i("Trying to get cv positions")
+            doOnSuccess {
+                Timber.i("Cv positions get successful")
+                present {
+                    it.positions?.let {
+                        if (it.isNotEmpty()) this@CvPresenter.positionList.addAll(it)
+                        onSavePositions()
+                    }
                 }
             }
             doOnError {

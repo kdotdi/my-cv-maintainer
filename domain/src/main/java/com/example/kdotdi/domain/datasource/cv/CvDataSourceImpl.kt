@@ -18,4 +18,9 @@ class CvDataSourceImpl @Inject constructor(
         safeCall {
             myCvMaintainerAPI.getCvSummary().bodyOrException(moshi).toEntity()
         }
+
+    override suspend fun getCvPositions(): MyCvMaintainerResult<CvPositions> =
+        safeCall {
+            myCvMaintainerAPI.getCvPositions().bodyOrException(moshi).toEntity()
+        }
 }

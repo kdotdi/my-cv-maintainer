@@ -31,7 +31,7 @@ class SnackbarManager @Inject constructor() {
 
         when (data.type) {
             SnackbarType.ERROR -> {
-                backgroundId = R.color.global_error
+                backgroundId = R.color.global_red
                 iconId = 0
             }
         }

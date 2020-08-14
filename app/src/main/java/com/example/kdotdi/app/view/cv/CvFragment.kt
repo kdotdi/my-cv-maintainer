@@ -48,12 +48,12 @@ class CvFragment :
                     containerAddPositions,
                     recyclerCvPositionsFront,
                     presenter.positionList,
-                    color(R.color.global_error),
+                    color(R.color.global_red),
                     drawable(R.drawable.ic_delete_sweep)
                 ) {
                     when (it) {
                         is AddPositionAction.CancelAction -> presenter.onClearPositionClicked()
-                        is AddPositionAction.SaveAction -> presenter.onSavePositionClicked()
+                        is AddPositionAction.SaveAction -> presenter.onSavePositions()
                         is AddPositionAction.AddAction -> presenter.onAddPositionClicked()
                     }
                 }

@@ -3,6 +3,7 @@ package com.example.kdotdi.presenter.cv
 import com.example.kdotdi.data.extensions.empty
 import com.example.kdotdi.data.util.CoroutineTestRule
 import com.example.kdotdi.domain.entity.*
+import com.example.kdotdi.domain.usecase.cv.GetCvPositionsUseCase
 import com.example.kdotdi.domain.usecase.cv.GetCvSummaryUseCase
 import com.example.kdotdi.presenter.cv.CvPresenter.Companion.MAX_NUMBER_OF_POSITIONS
 import io.mockk.*
@@ -23,6 +24,9 @@ class CvPresenterTest {
     @MockK
     lateinit var getCvSummaryUseCase: GetCvSummaryUseCase
 
+    @MockK
+    lateinit var getCvPositionsUseCase: GetCvPositionsUseCase
+
     @MockK(relaxUnitFun = true)
     lateinit var view: CvView
 
@@ -39,7 +43,8 @@ class CvPresenterTest {
 
         presenter = spyk(
             CvPresenter(
-                getCvSummaryUseCase = getCvSummaryUseCase
+                getCvSummaryUseCase = getCvSummaryUseCase,
+                getCvPositionsUseCase = getCvPositionsUseCase
             )
         )
         presenter.view = view
@@ -194,6 +199,7 @@ class CvPresenterTest {
     @Test
     fun onAddPositionClickedPositionIsValid() {
         presenter.positionList.add(testPosition)
+        presenter.currentlyActivePositionIndex = 0
         presenter.onAddPositionClicked()
 
         verify(exactly = 1) {
@@ -253,7 +259,7 @@ class CvPresenterTest {
 
     @Test
     fun onSavePositionClicked() {
-        presenter.onSavePositionClicked()
+        presenter.onSavePositions()
 
         verify(exactly = 1) {
             view.updateFrontPositionList()

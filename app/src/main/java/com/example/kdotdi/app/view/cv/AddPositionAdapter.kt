@@ -18,7 +18,7 @@ class AddPositionAdapter : RecyclerView.Adapter<AddPositionAdapter.AddPositionVi
 
     lateinit var presenter: AddPositionItemPresenter
     lateinit var data: MutableList<CvPosition>
-    private var activePosition = 0
+    private var activePosition = -1
     lateinit var activeItemView: View
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddPositionViewHolder {

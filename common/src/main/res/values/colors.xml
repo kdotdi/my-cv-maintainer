@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="global_error">#FF0000</color>
+    <color name="global_red">#FF4C4C</color>
+    <color name="global_red_transparent">#09FF0000</color>
     <color name="global_black">#000000</color>
     <color name="global_black_75percent">#BF000000</color>
     <color name="global_black_35percent">#59000000</color>

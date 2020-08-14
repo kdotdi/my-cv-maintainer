@@ -10,8 +10,6 @@
         android:id="@+id/textCvPositionActivePositionTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_100dp"
-        android:layout_marginTop="@dimen/margin_16dp"
         android:layout_marginBottom="@dimen/margin_8dp"
         android:hint="@string/cv_positions_title_hint"
         android:inputType="text"
