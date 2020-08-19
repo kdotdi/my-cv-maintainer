@@ -82,62 +82,7 @@ class AddPositionView {
             applyDivider(mirroringRecycler.context, Rect())
             adapter = displayPositionAdapter
         }
-        val swipePositionHandler = object : SwipeToDeletePositionCallback(viewGroup.context) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                addPositionAdapter.onPositionRemove(viewHolder.layoutPosition)
-            }
-
-            override fun getMovementFlags(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder
-            ) = if (addPositionAdapter.data.size == 1 && viewHolder.layoutPosition == 0) 0
-            else super.getMovementFlags(recyclerView, viewHolder)
-
-            override fun onChildDraw(
-                c: Canvas,
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
-            ) {
-                with(viewHolder.itemView) {
-                    onSwipeBackground.setBounds(
-                        right + dX.toInt(),
-                        top,
-                        right,
-                        bottom
-                    )
-                }
-                onSwipeBackground.draw(c)
-                binIcon?.let {
-                    with(viewHolder.itemView) {
-                        val binIconStartOffset =
-                        (BIN_ICON_START_OFFSET_WIDTH_MULTIPLIER * it.intrinsicWidth).toInt()
-                        val binIconEndOffset = binIconStartOffset - it.intrinsicWidth
-                        val binIconHalfHeight = it.intrinsicHeight / 2
-                        val itemViewCenter = (top + bottom) / 2
-                        it.setBounds(
-                            right - binIconStartOffset,
-                            itemViewCenter - binIconHalfHeight,
-                            right - binIconEndOffset,
-                            itemViewCenter + binIconHalfHeight
-                        )
-                    }
-                    it.draw(c)
-                }
-                super.onChildDraw(
-                    c,
-                    recyclerView,
-                    viewHolder,
-                    dX,
-                    dY,
-                    actionState,
-                    isCurrentlyActive
-                )
-            }
-        }
+        val swipePositionHandler = SwipePositionHandler(addPositionAdapter, onSwipeBackground, binIcon)
         val itemTouchHelper = ItemTouchHelper(swipePositionHandler)
         itemTouchHelper.attachToRecyclerView(viewGroup.recyclerCvPosition)
     }
